@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Life Insurance Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-inner">
+            <img src="public/Zenologo2.png" alt="Zeno Logo" class="header-logo">
+            <h1>Credit Life Insurance Comparison Calculator</h1>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Two-panel comparison grid -->
+        <div class="comparison-grid">
+
+            <!-- LEFT: Current Insurer -->
+            <div class="panel panel-current">
+                <div class="panel-header">
+                    <span class="panel-tag">Your Current Insurer</span>
+                </div>
+                <div class="form-group">
+                    <label for="currentRate">Rate (R per R1 000):</label>
+                    <input type="number" id="currentRate" placeholder="e.g. 5.00" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="loanAmount">Loan Amount (R):</label>
+                    <input type="number" id="loanAmount" placeholder="e.g. 100 000" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="loanTerm">Loan Term (months):</label>
+                    <input type="number" id="loanTerm" placeholder="e.g. 60" min="1" required>
+                </div>
+            </div>
+
+            <!-- RIGHT: Zenowethu -->
+            <div class="panel panel-zeno">
+                <div class="panel-header">
+                    <img src="public/Zenologo.svg" alt="Zenowethu" class="panel-logo">
+                    <span class="panel-tag">Zenowethu</span>
+                </div>
+                <div class="form-group">
+                    <label for="zenoRate">Rate (R per R1 000):</label>
+                    <input type="number" id="zenoRate" placeholder="e.g. 2.50" step="0.01" value="2.50" required>
+                </div>
+                <div class="form-group">
+                    <label>Loan Amount (R):</label>
+                    <input type="text" id="zenoLoanDisplay" class="mirrored" readonly tabindex="-1">
+                </div>
+                <div class="form-group">
+                    <label>Loan Term (months):</label>
+                    <input type="text" id="zenoTermDisplay" class="mirrored" readonly tabindex="-1">
+                </div>
+            </div>
+        </div>
+
+        <!-- Compare button -->
+        <button id="compareBtn" class="btn">Compare Now</button>
+
+        <!-- Phase 1: Loading bar -->
+        <div id="phase1" class="phase hidden">
+            <div class="loading-bar-track">
+                <div id="loadingBar" class="loading-bar-fill"></div>
+            </div>
+            <p class="anim-label">Comparing...</p>
+        </div>
+
+        <!-- Phase 2: Circular spinner -->
+        <div id="phase2" class="phase hidden">
+            <div class="spinner-ring">
+                <svg viewBox="0 0 80 80" class="spinner-svg">
+                    <circle class="spinner-track" cx="40" cy="40" r="32" />
+                    <circle id="spinnerArc" class="spinner-arc" cx="40" cy="40" r="32" />
+                </svg>
+                <div id="spinnerCheck" class="spinner-check">✓</div>
+            </div>
+            <p class="anim-label">Almost done...</p>
+        </div>
+
+        <!-- Phase 3: Results -->
+        <div id="results" class="results-grid hidden">
+
+            <!-- Result cards -->
+            <div class="result-card result-card-current">
+                <div class="result-card-label">Your Current Premium</div>
+                <div class="result-card-monthly" id="currentMonthly">—</div>
+            </div>
+
+            <div class="result-card result-card-zeno">
+                <div class="result-card-label">Zenowethu Premium</div>
+                <div class="result-card-monthly" id="zenoMonthly">—</div>
+            </div>
+
+            <!-- Savings banner -->
+            <div class="savings-banner" id="savingsBanner">
+                <div class="savings-text">
+                    <div class="savings-title">You could save with Zenowethu</div>
+                    <div class="savings-amounts">
+                        <span id="savingsMonthly" class="savings-highlight"></span>
+                        <span class="savings-sep">/month</span>
+                        &nbsp;·&nbsp;
+                        <span id="savingsTotal" class="savings-highlight"></span>
+                        <span class="savings-sep">total over loan term</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>© 2025 Zenowethu | All Rights Reserved</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
